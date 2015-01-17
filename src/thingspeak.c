@@ -105,7 +105,88 @@ int32_t ts_datastream_update(ts_context_t* ctx, ts_feed_id_t feed_id, char * dat
     return (n > 0) ? 0 : 1;
 }
 
+int32_t ts_datastream_update_three(ts_context_t* ctx, ts_feed_id_t feed_id, 
+                                    char * datastream_id1, /*"field1" */ ts_datapoint_t *datapoint1,
+                                    char * datastream_id2, /*"field2" */ ts_datapoint_t *datapoint2,
+                                    char * datastream_id3, /*"field3" */ ts_datapoint_t *datapoint3
+                                    )
+{
+    char  num[200]    = {0};
+    char  num1[200]    = {0};
+    char  num2[200]    = {0};
+    char  num3[200]    = {0};
+    ssize_t n         = 0;
+    ts_context_t *tsx = NULL;
+    ts_tm_t *timeinfo;
 
+    if(datapoint1->timestamp <= 0)
+        timeinfo = ts_settime(datapoint1, TS_TIME_LOCAL);
+        
+    switch(datapoint1->value_type)
+    {
+        case TS_VALUE_TYPE_I32:
+            sprintf(num1, "%s=%d", datastream_id1, datapoint1->value.i32_value);
+            break;
+        case TS_VALUE_TYPE_F32:
+            sprintf(num1, "%s=%f", datastream_id1, datapoint1->value.f32_value);
+            break;
+        case TS_VALUE_TYPE_STR:
+            sprintf(num1, "%s=%s", datastream_id1, datapoint1->value.str_value);
+            break;
+    }
+
+    switch(datapoint2->value_type)
+    {
+        case TS_VALUE_TYPE_I32:
+            sprintf(num2, "&%s=%d", datastream_id2, datapoint2->value.i32_value);
+            break;
+        case TS_VALUE_TYPE_F32:
+            sprintf(num2, "&%s=%f", datastream_id2, datapoint2->value.f32_value);
+            break;
+        case TS_VALUE_TYPE_STR:
+            sprintf(num2, "&%s=%s", datastream_id2, datapoint2->value.str_value);
+            break;
+    }
+
+    switch(datapoint3->value_type)
+    {
+        case TS_VALUE_TYPE_I32:
+            sprintf(num3, "&%s=%d", datastream_id3, datapoint3->value.i32_value);
+            break;
+        case TS_VALUE_TYPE_F32:
+            sprintf(num3, "&%s=%f", datastream_id3, datapoint3->value.f32_value);
+            break;
+        case TS_VALUE_TYPE_STR:
+            sprintf(num3, "&%s=%s", datastream_id3, datapoint3->value.str_value);
+            break;
+    }        
+
+    sprintf(num, "%s%s%s&created_at=%d-%d-%d %d:%d:%d", num1, num2, num3, (1900/*unix time start*/+timeinfo->tm_year),
+                                                                                (timeinfo->tm_mon+1),
+                                                                                   timeinfo->tm_mday,
+                                                                                   timeinfo->tm_hour,
+                                                                                    timeinfo->tm_min, 
+                                                                                   timeinfo->tm_sec);
+
+#if TS_DEBUG                                                                                    
+    printf("%s\n", num);
+#endif
+
+    if(feed_id == 0)
+        n = ts_http_post(ctx, HOST_API, "/update", num);
+    else
+    {
+        tsx = ts_create_context(ctx->api_key, feed_id);
+        if(tsx)
+        {
+            n = ts_http_post(ctx, HOST_API, "/update", num);
+            ts_delete_context(tsx);
+        }
+        else
+            return -1;
+    }
+    return (n > 0) ? 0 : 1;
+}
 
 char *ts_datastream_get(ts_context_t *ctx, ts_feed_id_t feed_id,
                                            ts_data_type_t type,
