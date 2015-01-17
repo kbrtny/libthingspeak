@@ -1,5 +1,8 @@
 # ThingSpeak C library (libthingspeak)
 
+Library forked from gabrield and added functionality to add more then one value (field1, field2, filed3 for example) 
+with one call to thinkspeak.com. It can be extended to all  8 fields that are accepted by thingspeak.com
+
 ## Beta Release Notes
 
   The goals of the design had been focused on supporting *unix* platforms
@@ -14,7 +17,7 @@
 
 Run this from the shell:
 
-      git clone  https://github.com/gabrield/libthingspeak
+      git clone  https://github.com/bcatalin/libthingspeak
       cd libthingspeak
       make all
 
