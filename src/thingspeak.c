@@ -40,7 +40,6 @@ int32_t ts_get_value_i32(ts_datapoint_t *datapoint)
     return datapoint->value.i32_value;
 }
 
-
 ts_datapoint_t *ts_set_value_f32(ts_datapoint_t *datapoint, float val)
 {
     datapoint->value_type = TS_VALUE_TYPE_F32;
