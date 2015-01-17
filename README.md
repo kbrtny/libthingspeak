@@ -20,6 +20,7 @@ Run this from the shell:
       git clone  https://github.com/bcatalin/libthingspeak
       cd libthingspeak
       make all
+      sudo make install
 
 ## Contributing
 
