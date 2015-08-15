@@ -104,16 +104,18 @@ int32_t ts_datastream_update(ts_context_t* ctx, ts_feed_id_t feed_id, char * dat
     return (n > 0) ? 0 : 1;
 }
 
-int32_t ts_datastream_update_three(ts_context_t* ctx, ts_feed_id_t feed_id, 
+int32_t ts_datastream_update_four(ts_context_t* ctx, ts_feed_id_t feed_id, 
                                     char * datastream_id1, /*"field1" */ ts_datapoint_t *datapoint1,
                                     char * datastream_id2, /*"field2" */ ts_datapoint_t *datapoint2,
-                                    char * datastream_id3, /*"field3" */ ts_datapoint_t *datapoint3
+                                    char * datastream_id3, /*"field3" */ ts_datapoint_t *datapoint3,
+                                    char * datastream_id4, /*"field4" */ ts_datapoint_t *datapoint4
                                     )
 {
     char  num[200]    = {0};
     char  num1[200]    = {0};
     char  num2[200]    = {0};
     char  num3[200]    = {0};
+    char  num4[200]    = {0};
     ssize_t n         = 0;
     ts_context_t *tsx = NULL;
     ts_tm_t *timeinfo;
@@ -158,9 +160,22 @@ int32_t ts_datastream_update_three(ts_context_t* ctx, ts_feed_id_t feed_id,
         case TS_VALUE_TYPE_STR:
             sprintf(num3, "&%s=%s", datastream_id3, datapoint3->value.str_value);
             break;
+    }  
+
+    switch(datapoint4->value_type)
+    {
+        case TS_VALUE_TYPE_I32:
+            sprintf(num4, "&%s=%d", datastream_id4, datapoint4->value.i32_value);
+            break;
+        case TS_VALUE_TYPE_F32:
+            sprintf(num4, "&%s=%f", datastream_id4, datapoint4->value.f32_value);
+            break;
+        case TS_VALUE_TYPE_STR:
+            sprintf(num4, "&%s=%s", datastream_id4, datapoint4->value.str_value);
+            break;
     }        
 
-    sprintf(num, "%s%s%s&created_at=%d-%d-%d %d:%d:%d", num1, num2, num3, (1900/*unix time start*/+timeinfo->tm_year),
+    sprintf(num, "%s%s%s%s&created_at=%d-%d-%d %d:%d:%d", num1, num2, num3, num4, (1900/*unix time start*/+timeinfo->tm_year),
                                                                                 (timeinfo->tm_mon+1),
                                                                                    timeinfo->tm_mday,
                                                                                    timeinfo->tm_hour,

@@ -104,7 +104,7 @@ float           ts_get_value_f32(ts_datapoint_t *);
 
 /* Datastream functions */
 int32_t ts_datastream_update(ts_context_t *, ts_feed_id_t, char *, ts_datapoint_t *);
-int32_t ts_datastream_update_three(ts_context_t *, ts_feed_id_t, char *, ts_datapoint_t *, char *, ts_datapoint_t *, char *, ts_datapoint_t *);
+int32_t ts_datastream_update_four(ts_context_t *, ts_feed_id_t, char *, ts_datapoint_t *, char *, ts_datapoint_t *, char *, ts_datapoint_t *, char *, ts_datapoint_t *);
 char   *ts_datastream_get(ts_context_t *, ts_feed_id_t, ts_data_type_t, char *, char *);
 
 
