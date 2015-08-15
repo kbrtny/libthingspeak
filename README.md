@@ -3,6 +3,8 @@
 Library forked from gabrield and added functionality to add more then one value (field1, field2, filed3 for example) 
 with one call to thinkspeak.com. It can be extended to all  8 fields that are accepted by thingspeak.com
 
+As a reference note, channels on thingspeak can only be updated once every 15 seconds, so it is most efficient to combine field updates into one channel update.
+
 ## Beta Release Notes
 
   The goals of the design had been focused on supporting *unix* platforms
