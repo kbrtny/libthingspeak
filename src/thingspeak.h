@@ -1,6 +1,10 @@
 #ifndef _THINGSPEAK_H_
 #define _THINGSPEAK_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <malloc.h>
@@ -110,5 +114,9 @@ char   *ts_datastream_get(ts_context_t *, ts_feed_id_t, ts_data_type_t, char *, 
 
 /* Datastream functions */
 char *ts_feed_get_all(ts_context_t *, ts_feed_id_t,  ts_data_type_t type, char *);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

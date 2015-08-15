@@ -1,7 +1,10 @@
 #ifndef  _TS_HTTP_H_
 # define _TS_HTTP_
 
-
+#ifdef __cplusplus
+extern "C" {
+#endif
+	
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <string.h>
@@ -22,5 +25,9 @@ extern int h_errno;
 
 ssize_t ts_http_post(ts_context_t *, char *, char *, char *);
 char   *ts_http_get(char *, char *, char *);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /*_TS_HTTP_*/
