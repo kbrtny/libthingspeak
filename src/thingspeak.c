@@ -3,7 +3,7 @@
 #include <ts_time.h>
 
 
-ts_context_t *ts_create_context(char *api_key, ts_feed_id_t feed_id)
+ts_context_t *ts_create_context(const char *api_key, ts_feed_id_t feed_id)
 {
     ts_context_t *ctx = NULL;
 
@@ -53,7 +53,7 @@ float ts_get_value_f32(const ts_datapoint_t *datapoint)
 }
 
 
-int32_t ts_datastream_update(ts_context_t* ctx, ts_feed_id_t feed_id, const char * datastream_id,
+int32_t ts_datastream_update(const ts_context_t* ctx, ts_feed_id_t feed_id, const char * datastream_id,
                                                                       ts_datapoint_t *datapoint)
 {
     char  num[200]    = {0};
@@ -104,7 +104,7 @@ int32_t ts_datastream_update(ts_context_t* ctx, ts_feed_id_t feed_id, const char
     return (n > 0) ? 0 : 1;
 }
 
-int32_t ts_datastream_update_four(ts_context_t* ctx, ts_feed_id_t feed_id, 
+int32_t ts_datastream_update_four(const ts_context_t* ctx, ts_feed_id_t feed_id, 
                                     const char * datastream_id1, /*"field1" */ ts_datapoint_t *datapoint1,
                                     const char * datastream_id2, /*"field2" */ ts_datapoint_t *datapoint2,
                                     const char * datastream_id3, /*"field3" */ ts_datapoint_t *datapoint3,

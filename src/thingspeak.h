@@ -95,7 +95,7 @@ typedef struct
 
 
 /*Context functions*/
-ts_context_t *ts_create_context(char *, ts_feed_id_t);
+ts_context_t *ts_create_context(const char *, ts_feed_id_t);
 void          ts_delete_context(ts_context_t *);
 
 
@@ -107,8 +107,8 @@ float           ts_get_value_f32(const ts_datapoint_t *);
 
 
 /* Datastream functions */
-int32_t ts_datastream_update(ts_context_t *, ts_feed_id_t, const char *, ts_datapoint_t *);
-int32_t ts_datastream_update_four(ts_context_t *, ts_feed_id_t, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *);
+int32_t ts_datastream_update(const ts_context_t *, ts_feed_id_t, const char *, ts_datapoint_t *);
+int32_t ts_datastream_update_four(const ts_context_t *, ts_feed_id_t, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *);
 char   *ts_datastream_get(const ts_context_t *, ts_feed_id_t, ts_data_type_t, const char *, char *);
 
 
