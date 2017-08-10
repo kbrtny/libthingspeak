@@ -33,7 +33,9 @@ typedef enum
     /* 32-bit floating point number */
     TS_VALUE_TYPE_F32,
     /* any string-econded data */
-    TS_VALUE_TYPE_STR
+    TS_VALUE_TYPE_STR,
+    /* Value type count */
+    TS_VALUE_TYPE_CNT
 } ts_value_type_t;
 
 
@@ -109,6 +111,7 @@ float           ts_get_value_f32(const ts_datapoint_t *);
 /* Datastream functions */
 int32_t ts_datastream_update(const ts_context_t *, ts_feed_id_t, const char *, ts_datapoint_t *);
 int32_t ts_datastream_update_four(const ts_context_t *, ts_feed_id_t, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *, const char *, ts_datapoint_t *);
+int32_t ts_datastream_update_many(const ts_context_t *, ts_feed_id_t, const char *[], ts_datapoint_t *, int many);
 char   *ts_datastream_get(const ts_context_t *, ts_feed_id_t, ts_data_type_t, const char *, char *);
 
 
