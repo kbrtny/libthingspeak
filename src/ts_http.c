@@ -2,7 +2,7 @@
 #include <ts_http.h>
 
 
-ssize_t ts_http_post(ts_context_t *ctx, char *host, char *page, char *poststr)
+ssize_t ts_http_post(const ts_context_t *ctx, const char *host, const char *page, const char *poststr)
 {
     int sockfd;
     struct sockaddr_in servaddr;
@@ -69,7 +69,7 @@ ssize_t ts_http_post(ts_context_t *ctx, char *host, char *page, char *poststr)
 
 
 
-char *ts_http_get(char *host, char *page, char *buffer)
+char *ts_http_get(const char *host, char *page, char *buffer)
 {
     int sockfd;
     FILE *sockwrap = NULL;
